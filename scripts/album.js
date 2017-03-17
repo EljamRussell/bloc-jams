@@ -30,6 +30,22 @@ var albumPicasso = {
      ]
  };
 
+// Another Example Album
+var albumShakira = {
+    title: 'Shakira',
+    artist: 'Shakira',
+    label: 'RCA Records',
+    year: '2014',
+    albumArtUrl: 'http://www.billboard.com/files/styles/review_main_image/public/shakira-410.jpg',
+    songs: [
+        { title: 'Dare (La La La)', duration: '3:07' },
+        { title: 'Cant Remember To Forget You feat', duration: '3:27' },
+        { title: 'Empire', duration: '3:50' },
+        { title: 'You Dont Care About Me', duration: '3:50' },
+        { title: 'Cut Me Deep feat. Magic!', duration: '3:15' }
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -42,14 +58,15 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
  };
 
-var setCurrentAlbum = function(album) {
-     // #1
+     // #1 - Select elements that we want to populate with text dynamically
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
+    
+var setCurrentAlbum = function(album) {
+    
      // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -68,3 +85,14 @@ var setCurrentAlbum = function(album) {
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
  };
+
+ var theAlbums = [albumPicasso, albumMarconi, albumShakira];
+    var i = 1;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(theAlbums[i]);
+        i++;
+        if (i == theAlbums.length) {
+          i = 0;
+        }
+    });
+};
