@@ -44,7 +44,7 @@ var createSongRow = function(songNumber, songName, songLength) {
     
     var onHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = songNumberCell.attr('data-song-number');
+        var songNumber = parseInt(songNumberCell.attr('data-song-number');
 
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(playButtonTemplate);
@@ -54,7 +54,7 @@ var createSongRow = function(songNumber, songName, songLength) {
     var offHover = function(event) {
         // Revert the content back to the number (from the play button)
         var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = songNumberCell.attr('data-song-number');
+        var songNumber = parseInt(songNumberCell.attr('data-song-number');
 
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
@@ -94,7 +94,11 @@ var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
  };
 
-var nextSong = function() {
+
+
+
+var nextSong = function(){
+    
     var getLastSongNumber = function(index){
        return index == 0 ? currentAlbum.songs.length : index;
     };
@@ -113,8 +117,10 @@ var nextSong = function() {
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.name + " - " + currentAlbum.name);
     $('.main-controls .play-pause').html(playerBarPauseButton);
     
-    var lastSongNumber = currentlyPlayingSongNumber;
+    var lastSongNumber = getLastSongNumber(currentSongIndex);
+    
     var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+    
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
 
     $nextSongNumberCell.html(pauseButtonTemplate);
@@ -146,7 +152,9 @@ var previousSong = function() {
     $('.main-controls .play-pause').html(playerBarPauseButton);
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
+    
     var $previousSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+    
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
     
     $previousSongNumberCell.html(pauseButtonTemplate);
