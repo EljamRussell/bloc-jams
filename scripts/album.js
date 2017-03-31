@@ -7,7 +7,7 @@ var createSongRow = function(songNumber, songName, songLength) {
       + '  </tr>'
       ;
      
-    var $row =(template);
+    var $row = $(template);
     
     var clickHandler = function() {
         
@@ -33,7 +33,7 @@ var createSongRow = function(songNumber, songName, songLength) {
             var $volumeThumb = $('.volume .thumb');
             $volumeFill.width(currentVolume + '%');
             $volumeThumb.css({left: currentVolume + '%'});
-                
+
             $(this).html(pauseButtonTemplate);
             updatePlayerBarSong()
             
@@ -49,7 +49,8 @@ var createSongRow = function(songNumber, songName, songLength) {
             } else {
                 $(this).html(playButtonTemplate);
                 $('.main-controls .play-pause').html(playerBarPlayButton);
-                currentSoundFile.pause();               }
+                currentSoundFile.pause();   
+            }
         }
     };
     
@@ -101,7 +102,7 @@ var setCurrentAlbum = function(album) {
      }
  };
 
-    var updateSeekBarWhileSongPlays = function() {
+var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
          // #10
          currentSoundFile.bind('timeupdate', function(event) {
@@ -116,7 +117,7 @@ var setCurrentAlbum = function(album) {
  };      
         
         
-    var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
     var offsetXPercent = seekBarFillRatio * 100;
     // #1
     offsetXPercent = Math.max(0, offsetXPercent);
@@ -151,7 +152,7 @@ var setupSeekBars = function() {
         
  
  
-$seekBars.find('.thumb').mousedown(function(event) {
+    $seekBars.find('.thumb').mousedown(function(event) {
          // #8
          var $seekBar = $(this).parent();
  
@@ -176,14 +177,16 @@ $seekBars.find('.thumb').mousedown(function(event) {
              $(document).unbind('mouseup.thumb');
          });
      });
+}
         
 var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
  }
 
-var setSong = function(songNumber) {
+var setSong = function(songNumber) {    
     if (currentSoundFile) {
-         currentSoundFile.stop();
+        currentSoundFile.stop();
+        currentVolume = currentSoundFile.getVolume();
      }
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
