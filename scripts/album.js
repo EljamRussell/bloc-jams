@@ -111,7 +111,7 @@ var updateSeekBarWhileSongPlays = function() {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
-             setCurrentTimeInPlayerBar(this.getTime(
+             setCurrentTimeInPlayerBar(this.getTime())
          });
      }
  };      
@@ -312,6 +312,7 @@ var setTotalTimeInPlayerBar = function(totalTime) {
 };
 
 var filterTimeCode = function(seconds) {
+    var seconds = parseFloat(seconds);
     var minutes = Math.floor(seconds / 60);
     seconds = Math.floor(seconds % 60);
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -335,7 +336,7 @@ var filterTimeCode = function(seconds) {
 
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');    
- var $playerBarPlayToggle = $('.main-controls .play-p
+ var $playerBarPlayToggle = $('.main-controls .play-pause');
 
  $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
